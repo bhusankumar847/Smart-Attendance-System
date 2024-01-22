@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+	<style type='text/css'>
+		* {
+		    padding: 0;
+	        margin: 0;
+		}
+	
+		body {
+			background-image: url('https://archive.factordaily.com/wp-content/uploads/2018/01/Frrole_Lead.gif?resolution=1366,1');
+			background-size: cover;
+			margin-top: 40px;
+			height: 80vh;
+			padding: 0;
+			margin: 0;
+		}
+
+		.a {
+			color: white;
+			padding: 15px;
+			text-align: center;
+			font-family: "Times New Roman";
+			font-size: 50px;
+            font-weight: bold;
+		}
+
+		.b {
+			color:rgb(0, 0, 0);
+			font-family: "Times New Roman";
+			font-size: 20px;
+            font-weight: bold;
+		}
+
+		.c {
+			color:rgb(0, 0, 0);
+			font-family: "Times New Roman";
+			font-size: 20px;
+            font-weight: bold;
+		}
+
+		.d {
+			color:rgb(0, 0, 0);
+			font-family: "Times New Roman";
+			font-size: 20px;
+            font-weight: bold;
+		}
+
+		.e {
+			color:rgb(0, 0, 0);
+			font-family: "Times New Roman";
+			font-size: 22px;
+            font-weight: bold;
+		}
+
+		.f {
+			color:rgb(241, 238, 37);
+			font-family: "Times New Roman";
+			font-size: 22px;
+            font-weight: bold;
+		}
+	</style>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Faculty Registeration Form</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">              
+</head>
+
+<body>
+	<div class="container">
+		<h2 class= "a">Faculty Registration</h2>
+		<form action="{{ url_for('register') }}" method="post">
+
+			{% if mesage is defined and mesage %}
+			<div class="alert alert-warning">{{ mesage }}</div>
+			{% endif %}
+
+			<div class="b">
+				<label for="name">Name:</label>
+				<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" name="name">
+			</div>
+			<br>
+			<div class="c">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" name="email" placeholder="Enter email" name="email">
+			</div>
+			<br>
+			<div class="d">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="password" name="password" placeholder="Enter password" name="pswd">
+			</div>
+			<br>    
+			<button type="submit" class="btn btn-primary"><strong>Register</strong></button>
+			<p class="e">Already have an account?  <a class="f" href="{{url_for('login')}}"><strong>  Login here  </strong></a></p>
+		</form>
+	</div>        
+</body>
+</html>

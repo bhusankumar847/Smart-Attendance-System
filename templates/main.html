@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+    <style type='text/css'>
+        * {
+												padding: 0;
+												margin: 0;
+        }
+
+        body {
+            background-image: url('https://thumbs.gfycat.com/CircularDefinitiveAsianelephant-size_restricted.gif');
+            background-size: cover;
+            margin-top: 40px;
+            height: 80vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        .a {
+            color: white;
+												padding: 11px;
+												text-align: center;
+												font-family: "Times New Roman";
+												font-size: 50px;
+            font-weight: bold;
+        }
+
+								.b {
+											color: rgba(241, 77, 12, 0.719);
+											text-align: center;
+											font-family: "Times New Roman";
+											font-size: 20px;
+           font-weight: bold;
+		      }
+
+								.c {
+											color: #e7a457;
+											text-align: center;
+											font-family: "Times New Roman";
+											font-size: 22px;
+           font-weight: bold;
+											width:100%;
+											position: fixed;
+           bottom: 0;
+		      }
+
+        table {
+        border: 1px;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 86%;
+        margin: auto;
+        }
+
+    td,
+    th {
+        border: 1px solid black !important;
+        padding: 5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Smart Attendance System</title>
+</head>
+
+<body>
+    <div class= "a">
+        <h1>Smart Attendance System</h1>
+    </div>
+
+    <div class= "b">	
+		      Logged in : <strong>{{session.name}}</strong> | <a href="{{ url_for('logout') }}"> Logout</a>
+	   </div>
+
+    <div class= "c">
+        <h3>{{ datetoday2 }} | <span id="clock"></span></h3>
+    </div>
+
+    {% if mess%}
+    <p style= "color: red; font-size: 20px; text-align: center;">{{ mess }}</p>
+    {% endif %}
+
+    <div class= "row text-center" style= "padding: 20px; margin: 20px;">
+        <div class= "col"
+            style= "border-radius: 20px; padding: 0px; background-color:rgba(76, 240, 212, 0.719); margin: 0px 10px 10px 10px; min-height: 400px;">
+            <h2 style= "border-radius: 20px 20px 0px 0px; background-color: #e7a457; color: white; padding: 10px;">Today's
+                Attendance <i class="material-icons">assignment</i></h2>
+            <a style= "text-decoration: none; max-width: 300px;" href="/start">
+                <button
+                    style= "font-size: 24px; font-weight: bold; border-radius: 10px; width:490px; padding: 10px; margin-top: 30px; margin-bottom: 30px;"
+                    type= 'submit' class= 'btn btn-primary'>Take Attendance <i
+                        class= "material-icons">beenhere</i></button>
+            </a>
+            <table style="background-color: rgba(255, 255, 255, 0.911);">
+                <tr>
+                    <td><b>S No</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Roll No</b></td>
+                    <td><b>Time</b></td>
+                </tr>
+                {% if l %}
+
+                {% for i in range(l) %}
+                <tr>
+                    <td>{{ i+1 }}</td>
+                    <td>{{ names[i] }}</td>
+                    <td>{{ rolls[i] }}</td>
+                    <td>{{ times[i] }}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+
+        <div class="col"
+            style="border-radius: 20px;padding: 0px;background-color: rgba(76, 240, 212, 0.719);margin:0px 10px 10px 10px;height: 400px;">
+            <form action='/add' method="POST" enctype="multipart/form-data">
+                <h2 style="border-radius: 20px 20px 0px 0px;background-color: #e7a457;color: white;padding: 10px;">Add
+                    New User <i class="material-icons">control_point_duplicate</i></h2>
+                <label style="font-size: 20px;"><b>Enter New User Name*</b></label>
+                <br>
+                <input type="text" id="newusername" name='newusername'
+                    style="font-size: 20px;margin-top:10px;margin-bottom:10px;" required>
+                <br>
+                <label style="font-size: 20px;"><b>Enter Roll No*</b></label>
+                <br>
+                <input type="number" id="rollno" name='rollno'
+                    style="font-size: 20px;margin-top:10px;margin-bottom:10px;" required>
+                <br>
+                <button style="width: 232px;margin-top: 20px;font-size: 20px;" type='submit' class='btn btn-dark'>Add
+                    New User
+                </button>
+                <br>
+                <h5 style="padding: 25px;"><i>Total Users in Database: {{totalreg}}</i></h5>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var clockElement = document.getElementById('clock');
+
+        function clock() {
+            clockElement.textContent = new Date().toString().slice(15, 24);
+        }
+
+        setInterval(clock, 1000);
+    </script>
+
+</body>
+</html>
